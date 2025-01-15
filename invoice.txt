@@ -1,0 +1,14 @@
+Company name: Williys Automobile							Date:1/20/2025
+Company Address: 102 Saigon St, Guelph, Ontario Canada
+Phone number: (666) 123-5555
+Email Address: wiilly@gmail.com
+
+
+Description:			  Price:
+718 Cayman        $696,966,969.00
+718 Cayman        $696,966,969.00
+718 Cayman        $696,966,969.00
+
+Subtotal:        $2,090,900,907.00
+Tax:               $271,817,117.91
+Total:           $2,362,718,024.91

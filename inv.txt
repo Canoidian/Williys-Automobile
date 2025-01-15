@@ -1,0 +1,23 @@
+Pagani Zonda HP Barchetta,17000000,
+Aston Martin Vantage,262792,
+Ferrari 12Cillindro,467000,
+Porsche 911 GT3 RS,224495,
+Ferrari SF90,890000,
+McLaren Artura,281008,
+
+718 Cayman,85335,
+911 Carrera,149722,
+Taycan 4S,149722,
+Panamera,130642,
+Macan,72835,
+Cayenne,99235,
+
+S60,43795,
+XC90,75550,
+V90 Cross Country,59800,
+EX90,110000,
+
+Prius,41160,
+Camry,37295,
+Corolla,26865,
+RAV4,36620,
