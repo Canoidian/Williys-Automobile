@@ -48,22 +48,20 @@ public class devMode {
      * - Selected car details will be updated
      * - Changes will be saved to inv.txt
      */
-    public static void edit(File inv, int itemToEdit, String[] carModels, int[] carPrices, int count) throws FileNotFoundException {
+    public static void edit(File inv, int itemToEdit, String[] carModels, int[] carPrices, int count) throws IOException {
         Scanner sc = new Scanner(inv);
-        boolean confirm = false;
-
+        
         Other.clear();
         if (itemToEdit > 0) {
             itemToEdit -= 1;
         }
         System.out.printf("\nCurrent Model: %-20s Current Price: $%,d%n", carModels[itemToEdit], carPrices[itemToEdit]);
-
+    
         System.out.println("\n1. Edit car model name");
         System.out.println("2. Edit car price");
         System.out.println("3. Edit both");
-        System.out.println("4. Delete Car");
         int choice = Input.intValid("Enter your choice (1-3): ", 1, 3);
-
+    
         switch (choice) {
             case 1:
                 System.out.print("Enter new model name: ");
@@ -79,18 +77,7 @@ public class devMode {
                 carModels[itemToEdit] = input2.nextLine();
                 carPrices[itemToEdit] = Input.intValid("Enter new price: ");
                 break;
-            case 4:
-                confirm = Input.yesNoValid("Are you sure you want to delete this car? (y/n): ");
-                if (confirm) {
-                    carModels[itemToEdit] = null;
-                    carPrices[itemToEdit] = 0;
-                    count--;
-                }
-                break;
         }
-
-        writeToFile(carModels, carPrices, count);
-        System.out.println("Changes saved successfully!");
     }
 
     /**

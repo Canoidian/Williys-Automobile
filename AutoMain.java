@@ -10,8 +10,7 @@ import java.io.*;
 public class AutoMain {
     public static void printModels(File inv, String range, int start, int end) throws IOException {
         // Objects and Variables
-        File f = new File("inv.txt");
-        Scanner sc = new Scanner(f);
+        Scanner sc = new Scanner(inv);
         sc.useDelimiter(",");
 
         String[] carModels = new String[100];
@@ -20,14 +19,10 @@ public class AutoMain {
         System.out.println("-----------------" + Other.Colour.CYAN + range + Other.Colour.RESET +  "-----------------");
 
         // Add car models to array
-        while (sc.hasNext()); {
+        while (sc.hasNext()) {
             carModels[increment] = sc.next();
-            System.out.println("NINJA ATTACK: " + carModels[increment]);
+            sc.nextLine();
             increment++;
-        }
-
-        for (int i = 0; i < carModels.length; i++) {
-            System.out.println(carModels[i]);
         }
 
         // Output all car models
@@ -56,29 +51,29 @@ public class AutoMain {
             case 5: // Exit
                 break;
             case 4: // Super cars
-                printModels(inv, " SUPER CARS ", 1, 6);
+                printModels(inv, " SUPER CARS ", 0, 6);
 
                 // Prompts user
                 option = Input.intValid("\nChoose a model: ", 1, 6);
-                CartHandler.displayCarInfo(inv , "High", 5);
+                CartHandler.displayCarInfo(inv , "Super", option);
                 break;
             case 3: // High range models
-                printModels(inv, " HIGH RANGE CARS ", 8, 13);
+                printModels(inv, " HIGH RANGE CARS ", 6, 12);
 
                 option = Input.intValid("\nChoose a model: ", 1, 6);
-                CartHandler.displayCarInfo(inv , "High", 5);
+                CartHandler.displayCarInfo(inv , "High", option);
                 break;
             case 2: // Mid Range models
-                printModels(inv, " MID RANGE CARS ", 15, 18);
+                printModels(inv, " MID RANGE CARS ", 12, 16);
 
                 option = Input.intValid("\nChoose a model: ", 1, 4);
-                CartHandler.displayCarInfo(inv , "High", 5);
+                CartHandler.displayCarInfo(inv , "Mid", option);
                 break;
             case 1: // Low range models
-                printModels(inv, " LOW RANGE CARS ", 20, 23);
+                printModels(inv, " LOW RANGE CARS ", 16, 20);
 
                 option = Input.intValid("\nChoose a model: ", 1, 4);
-                CartHandler.displayCarInfo(inv , "High", 5);
+                CartHandler.displayCarInfo(inv , "Low", option);
                 break;
             default: 
             break;
@@ -99,16 +94,19 @@ public class AutoMain {
             //Other.clear();
             System.out.println(Other.Colour.BACKGROUND_CYAN + "Willy's Automobiles");
 
-            System.out.println(Other.Colour.RESET + "\n1. View Models\n2. Checkout\n3. Quit");
-            menuChoices = Input.intValid("\nPlease choose an option: ");
+            System.out.println(Other.Colour.RESET + "\n1. View Models\n2. View Cart\n3. Checkout\n4. Quit");
+            menuChoices = Input.intValid("\nPlease choose an option: ", 1, 4);
             switch (menuChoices) {
                 case 1:
                     viewModels(inv);
                     break;
                 case 2:
-                    CheckoutProcess.checkOut();
+                    CartHandler.viewCart();
                     break;
                 case 3:
+                    CheckoutProcess.checkOut();
+                    break;
+                case 4:
                     again = false;
                     break;
                 default:

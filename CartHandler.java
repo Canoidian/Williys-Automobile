@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.NoSuchElementException;
 import java.io.*;
 
 public class CartHandler {
@@ -57,7 +58,6 @@ public class CartHandler {
 
         // Print info
         System.out.println("Model: " + modelName + "\nPrice: $" + price + "\nDate: " + date + "\n");
-
     }
 
     public static void printToCart(File inv, String modelName) throws IOException {
@@ -81,7 +81,6 @@ public class CartHandler {
         // Rewrites to file again
         outputFile = new PrintWriter("cart.txt");
         for (int i = 0; i < currentCart.length; i++) {
-            //System.out.println(currentCart[i]);
             if (currentCart[i] != null) {
                 outputFile.println(currentCart[i]);
             }
@@ -93,24 +92,55 @@ public class CartHandler {
 
     // Save file
     outputFile.close();
+    System.out.println("Successfully added to cart!");
 }
 
-    public static void viewCart(File cart, Scanner sc) throws IOException{
+    public static void viewCart() throws IOException{
         // Objects and Variables
+        File cart = new File("cart.txt");
+        Scanner sc;
         String item;
-        int index = 1;
+        int index = 1, option, price;
 
         // Reads file and outputs cart
         try {
             sc = new Scanner(cart);
+            sc.useDelimiter(",");
             while (sc.hasNext()) {
-                item = sc.nextLine();
-                System.out.println(index + ". " + item);
+                item = sc.next();
+                price = sc.nextInt();
+                System.out.printf(index + ". %-20s Price:  $%,d%n", item, price);
                 index++;
+                sc.nextLine();
             }
         } catch (FileNotFoundException e) {
             System.out.println("Cart is empty.");
         }
+
+        // Options
+        System.out.println("\n1. Remove item\n2. Checkout\n3. Back");
+        option = Input.intValid("Enter an option: ", 1, 3);
+
+        switch (option) {
+            case 1: // Remove item
+                removeItem(cart, 2);
+                break;
+        
+            case 2: // Checkout
+                CheckoutProcess.checkOut();
+                break;
+            case 3:
+                
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void removeItem(File cart, int lineNumber) throws IOException {
+        // objects and vars
+        
+
     }
 
     public static void displayCarInfo(File inv, String modelTier, int car) throws IOException {
@@ -121,22 +151,31 @@ public class CartHandler {
         // Find car model in respective tier and outputs information
         Other.clear();
         switch (modelTier) {
+            case "Super":
+                // Output information about car
+                getCarInfo(inv, car, 2018);
+                modelName = getModelName(inv, car);
+
+                // Prompts user if they want to add to cart
+                addToCart = Input.yesNoValid("Add to cart? (y/n): ");
+                break;
             case "High":
-                switch (car) {
-                    case 6:
-                    // Output information about car
-                    getCarInfo(inv, 8, 2008);
-
-                    // Prompts user if they want to add to cart
-                    addToCart = Input.yesNoValid("Add to cart? (y/n): ");
-                    break;
-                    case 5:
-                    // Output information about car
-                    getCarInfo(inv, 2, 2008);
-
-                    // Prompts user if they want to add to cart
-                    addToCart = Input.yesNoValid("Add to cart? (y/n): ");
-                }
+                getCarInfo(inv, car + 6, 2018);
+                modelName = getModelName(inv, car + 6);
+                addToCart = Input.yesNoValid("Add to cart? (y/n): ");
+                break;
+            case "Mid":
+                getCarInfo(inv, car + 12, 2018);
+                modelName = getModelName(inv, car + 12);
+                addToCart = Input.yesNoValid("Add to cart? (y/n): ");
+                break;
+            case "Low":
+                getCarInfo(inv, car + 16, 2018);
+                modelName = getModelName(inv, car + 16);
+                addToCart = Input.yesNoValid("Add to cart? (y/n): ");
+                break;
+            default:
+                System.out.println("ERROR");
         }
 
         // Checks if user added to cart
