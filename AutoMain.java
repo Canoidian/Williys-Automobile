@@ -42,11 +42,13 @@ public class AutoMain {
 
         // Prints options
         Other.clear();
-        System.out.println("1. Low Range Cars\n2. Mid Range Cars\n3. High Range Cars\n4. Super Cars\n5. Back");
-        option = Input.intValid("Enter an option: ", 1, 5);
+        System.out.println(Other.Colour.BACKGROUND_CYAN + "Willy's Automobiles!" + Other.Colour.RESET);
+        System.out.println("\n1. Low Range Cars\n2. Mid Range Cars\n3. High Range Cars\n4. Super Cars\n5. Back");
+        option = Input.intValid("\nEnter an option (1-5): ", 1, 5);
 
         // Options
         Other.clear();
+        System.out.println(Other.Colour.BACKGROUND_CYAN + "Willy's Automobiles!" + Other.Colour.RESET);
         switch (option) {
             case 5: // Exit
                 break;
@@ -92,10 +94,10 @@ public class AutoMain {
         //! Menu
         while (again) {
             //Other.clear();
-            System.out.println(Other.Colour.BACKGROUND_CYAN + "Willy's Automobiles");
+            System.out.println(Other.Colour.BACKGROUND_CYAN + "Willy's Automobiles" + Other.Colour.RESET);
 
-            System.out.println(Other.Colour.RESET + "\n1. View Models\n2. View Cart\n3. Checkout\n4. Quit");
-            menuChoices = Input.intValid("\nPlease choose an option: ", 1, 4);
+            System.out.println(Other.Colour.RESET + "\n1. View Models\n2. View Cart\n3. Checkout\n4. Console\n5. Quit");
+            menuChoices = Input.intValid("\nEnter an option (1-5): ", 1, 5);
             switch (menuChoices) {
                 case 1:
                     viewModels(inv);
@@ -107,6 +109,9 @@ public class AutoMain {
                     CheckoutProcess.checkOut();
                     break;
                 case 4:
+                    devMode.main(null);
+                    break;
+                case 5:
                     again = false;
                     break;
                 default:

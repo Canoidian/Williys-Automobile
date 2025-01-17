@@ -22,18 +22,18 @@ public class devMode {
         while(sc.hasNext()) {
             String line = sc.nextLine();
             String[] parts = line.split(",");
-
             if (parts.length >= 2) {
                 carModels[count] = parts[0].trim();
                 carPrices[count] = Integer.parseInt(parts[1].trim());
                 count++;
             }
         }
-
+    
         for (int i = 0; i < count; i++) {
-            System.out.printf(i + 1 + ". " + "Model: %-20s Price: $%,d%n", carModels[i], carPrices[i]);
+            String indexFormat = (i + 1) < 10 ? String.format("%02d", i + 1) : String.format("%d", i + 1);
+            System.out.printf("%s. Model: %-30s Price: $%,d%n", indexFormat, carModels[i], carPrices[i]);
         }
-
+    
         return count;
     }
 
@@ -52,6 +52,7 @@ public class devMode {
         Scanner sc = new Scanner(inv);
         
         Other.clear();
+        System.out.println(Other.Colour.BACKGROUND_CYAN + "Willy's Automobiles" + Other.Colour.RESET);
         if (itemToEdit > 0) {
             itemToEdit -= 1;
         }
@@ -60,7 +61,7 @@ public class devMode {
         System.out.println("\n1. Edit car model name");
         System.out.println("2. Edit car price");
         System.out.println("3. Edit both");
-        int choice = Input.intValid("Enter your choice (1-3): ", 1, 3);
+        int choice = Input.intValid("Enter an option (1-3): ", 1, 3);
     
         switch (choice) {
             case 1:
@@ -92,6 +93,8 @@ public class devMode {
      * - Returns updated count
      */
     public static int addNewCar(int[] carPrices, String[] carModels, int count) {
+        Other.clear();
+        System.out.println(Other.Colour.BACKGROUND_CYAN + "Willy's Automobiles" + Other.Colour.RESET);
         if (count >= carModels.length) {
             System.out.println("Error: Inventory is full. Cannot add more cars.");
             return count;
@@ -151,28 +154,35 @@ public class devMode {
      * - All changes are saved to inv.txt
      */
     public static void main(String[] args) throws IOException {
-        //Other.clear();
+        Other.clear();
+        System.out.println(Other.Colour.BACKGROUND_CYAN + "Willy's Automobiles" + Other.Colour.RESET);
 
         File inv = new File("inv.txt");
         Scanner sc = new Scanner(inv);
+        String password = "WilliyCar123", userPass;
 
-        Input.stringValid("Please enter your password: ");
+        // userPass = Input.stringValid("Please enter your password: ");
+        // if (!userPass.equals(password)) {
+        //     System.out.println(Other.Colour.RED + "Incorrect password. Access denied." + Other.Colour.RESET);
+        //     System.exit(0);
+        // }
 
         String[] carModels = new String[100];
         int[] carPrices = new int[100];
         int count = 0, itemToEdit, max;
         boolean again = true;
 
+        Other.clear();
+        System.out.println(Other.Colour.BACKGROUND_CYAN + "Willy's Automobiles" + Other.Colour.RESET);
         count = arrayFill(carModels, carPrices, count, sc, inv);
         max = count;
 
         while (again) {
-            //Other.clear();
 
             System.out.println("\n1. Edit existing car price/model");
             System.out.println("2. Add new car");
             System.out.println("3. Exit");
-            int choice = Input.intValid("Enter your choice (1-3): ", 1, 3);
+            int choice = Input.intValid("Enter an option (1-3): ", 1, 3);
 
             switch (choice) {
                 case 1:
